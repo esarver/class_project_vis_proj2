@@ -4,6 +4,90 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualization of Fuel Economy 1984-2017</title>
+    <script src="results.json" type="text/json"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        class Result {
+            constructor(name, nationality, result)
+            {
+                this.name = name
+                this.nationality = nationality
+                this.result = results
+            }
+        }
+        class GameResult {
+            constructor(location, year, gold, silver, bronze)
+            {
+                this.location = location
+                this.results = results
+                this.year = year
+                this.gold = gold
+                this.silver = silver
+                this.bronze = bronze
+            }
+        }
+        class Games {
+            constructor(games, gender, name, type, url)
+            {
+                this.games = games
+                this.gender = gender
+                this.name = name
+                this.type = type
+                this.url = url
+            }
+        }
+
+        var reoganized_results = new Array()
+
+        results.forEach(game => {
+            var games = new Map()
+
+            game.games.forEach(results => {
+                var gold, silver, bronze
+                results.results.forEach(result => {
+                    if (result.medal === "G"){
+                        gold.push(Result(result.name, result.nationality, result.result))
+                    }else if (result.medal === "S") {
+                        silver.push(Result(result.name, result.nationality, result.result))
+                    }else if (result.medal === "B") {
+                        bronze.push(Result(result.name, result.nationality, result.result)) 
+                    }
+                })
+                games.set(results.year, GameResult(results.location, results.year, gold, silver, bronze))
+            })
+            reoganized_results.push(Games(games, game.gender, game.name, game.type, game.url))
+        })
+        /*
+            "results" = [
+                {
+                    "games": [
+                        {
+                            "location": "Rio",
+                            "results": [
+                                {
+                                    "medal": "G",
+                                    "name": "Mohamed FARAH",
+                                    "nationality": "USA",
+                                    "result": "25:05.17"
+                                }
+                            ],
+                            "year": 2016
+                        }
+                    ],
+                    "gender": "M",
+                    "name": "10000M Men",
+                    "type": "time",
+                    "url": "https://www.olympic.org/athletics/10000m-men"
+                }
+            ]
+        */
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+        
+        //TODO: reorganize data into easier structure to work with
+
+
+    </script>
     <script src="index.js"></script>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
