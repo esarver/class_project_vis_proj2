@@ -125,13 +125,9 @@ function generateTable(game_results) {
     var years = new Array()
     game_results.games.forEach((result, key) => {
         years.push([key,
-            // result.location,
             result.gold.result,
-            // result.gold[0].name + "(" + result.gold[0].nationality + ")",
             result.silver.result,
-            // result.silver[0].name + "(" + result.silver[0].nationality + ")",
             result.bronze.result
-            // result.bronze[0].name + "(" + result.bronze[0].nationality + ")",
         ])
     })
 
@@ -146,20 +142,14 @@ function generateTable(game_results) {
 }
 
 google.charts.load('current', { 'packages': ['line', 'corechart'] });
-// google.charts.setOnLoadCallback(drawChart);
 
 function drawChart(element, results, name = '10000M Men') {
-
     var data = new google.visualization.DataTable();
     // Year, Location, Gold Record, Gold Name(s) (Country), Silver, Silver Names (Country), Bronze, Bronze Names (Country) 
     data.addColumn({ type: 'number', label: 'Year', role: 'domain' })
-    // data.addColumn({ type: 'string', label: 'Location', role: 'annotationText' })
     data.addColumn({ type: 'number', label: 'Gold', role: 'data' })
-    // data.addColumn({ type: 'string', label: 'Gold Winner', role: 'annotationText'})
     data.addColumn({ type: 'number', label: 'Silver', role: 'data' })
-    // data.addColumn({ type: 'string', label: 'Silver Winner', role: 'annotationText'})
     data.addColumn({ type: 'number', label: 'Bronze', role: 'data' })
-    // data.addColumn({ type: 'string', label: 'Bronze Winner', role: 'annotationText'})
 
     var rows = generateTable(results.get(name))
     data.addRows(rows)
@@ -194,8 +184,6 @@ function drawChart(element, results, name = '10000M Men') {
         width: 1800,
         height: 800
     };
-
-    // var chart = new google.visualization.LineChart(document.getElementById(element));
     var chart = new google.charts.Line(document.getElementById(element));
 
     chart.draw(data, google.charts.Line.convertOptions(options));
