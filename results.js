@@ -1861,6 +1861,12 @@ original_results = [
                         "name": "Grantley GOULDING", 
                         "nationality": "GBR", 
                         "result": 17.7
+                    },
+                    {
+                        "medal": "B",
+                        "name": null,
+                        "nationality": null,
+                        "result": null
                     }
                 ], 
                 "year": 1896
@@ -2516,7 +2522,7 @@ original_results = [
                         "medal": "B", 
                         "name": "Albin LERMUSIAUX", 
                         "nationality": "FRA", 
-                        "result": "4:36.0"
+                        "result": "4:36.0" 
                     }
                 ], 
                 "year": 1896
@@ -5041,7 +5047,20 @@ original_results = [
                         "name": "Wyndham HALSWELLE", 
                         "nationality": "GBR", 
                         "result": 50.0
+                    },
+                    {
+                        "medal": "S",
+                        "name": null,
+                        "nationality": null,
+                        "result": null
+                    },
+                    {
+                        "medal": "B",
+                        "name": null,
+                        "nationality": null,
+                        "result": null
                     }
+                    
                 ], 
                 "year": 1908
             }, 
@@ -5422,6 +5441,12 @@ original_results = [
             {
                 "location": "Beijing", 
                 "results": [
+                    {
+                        "medal": "G", 
+                        "name": null, 
+                        "nationality": null, 
+                        "result": null 
+                    },
                     {
                         "medal": "S", 
                         "name": null, 
@@ -5931,6 +5956,12 @@ original_results = [
                         "name": null, 
                         "nationality": "SWE", 
                         "result": "0:42.6"
+                    },
+                    {
+                        "medal": "B", 
+                        "name": null, 
+                        "nationality": null, 
+                        "result": null
                     }
                 ], 
                 "year": 1912
