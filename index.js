@@ -180,23 +180,23 @@ function drawChart(element, results, name = '10000M Men') {
     var options = {
         title: name,
         series: {
-            0: { targetAxisIndex: 1, color: "#FFD700" },
-            1: { targetAxisIndex: 2, color: "#B3B3B3" },
-            2: { targetAxisIndex: 3, color: "#CD7F32" },
+            0: { targetAxisIndex: 0, color: "#FFD700" },
+            1: { targetAxisIndex: 0, color: "#B3B3B3" },
+            2: { targetAxisIndex: 0, color: "#CD7F32" },
         },
         hAxis: {
             format: "####"
         },
         vAxis: {
             title: score_type,
-            scaleType: null
         },
         interpolateNulls: true,
-        width: 1000,
+        width: 1800,
         height: 800
     };
 
-    var chart = new google.visualization.LineChart(document.getElementById(element));
+    // var chart = new google.visualization.LineChart(document.getElementById(element));
+    var chart = new google.charts.Line(document.getElementById(element));
 
-    chart.draw(data, options);
+    chart.draw(data, google.charts.Line.convertOptions(options));
 }
