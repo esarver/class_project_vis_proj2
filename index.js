@@ -17,11 +17,12 @@ function timeString2ms(timestring) {// HH:MM:SS.mss
         }
     }
     ms = (dec_split.length > 1) ? parseInt(dec_split[1]) : 0
-    var split = dec_split[0].split(':')
+    var split = dec_split[0].split(':').reverse()
 
     switch (split.length) {
         case 3:
             ms += parseInt(split[2]) * 60 * 60 * 1000
+
         case 2:
             ms += parseInt(split[1]) * 60 * 1000
         case 1:
@@ -56,22 +57,31 @@ class Event {
         this.url = url
     }
 }
-
-function addRadioButtons() {
-    var div = document.getElementById("choices")
+var previous_selection = null
+function addCharts() {
+    var div = document.getElementById("charts")
     var count = 0;
     reorganized_results.forEach((value, key) => {
-        var radio = document.createElement("input", {
-            type: "radio",
-            name: "options",
-            value: key,
-            checked: false,
-            id: "option" + count
+        var button_id = "button" + String(count)
+
+        var button = document.createElement("button")
+        button.className = "option_selection"
+        button.id = button_id
+        button.innerHTML = key
+
+        div.appendChild(button);
+        button.addEventListener("click", function () {
+            if (previous_selection !== null) {
+                previous_selection.classList.toggle("active")
+            }
+            this.classList.toggle("active")
+            previous_selection = this
+            drawChart('linechart_material', reorganized_results, this.innerHTML)
         })
-        radio.innerText = key
+
         count++;
-        div.appendChild(radio)
     })
+    document.getElementById('button0').click()
 }
 
 var reorganized_results = new Map()
@@ -107,7 +117,7 @@ original_results.forEach(event => {
     reorganized_results.set(event.name, new Event(years, event.gender, event.name, event.type, event.url))
 })
 
-window.onload = addRadioButtons
+window.onload = addCharts
 
 function generateTable(game_results) {
 
@@ -135,10 +145,10 @@ function generateTable(game_results) {
     return years
 }
 
-google.charts.load('current', { 'packages': ['line'] });
-google.charts.setOnLoadCallback(drawChart);
+google.charts.load('current', { 'packages': ['line', 'corechart'] });
+// google.charts.setOnLoadCallback(drawChart);
 
-function drawChart(results, name = '10000M Men') {
+function drawChart(element, results, name = '10000M Men') {
 
     var data = new google.visualization.DataTable();
     // Year, Location, Gold Record, Gold Name(s) (Country), Silver, Silver Names (Country), Bronze, Bronze Names (Country) 
@@ -168,21 +178,25 @@ function drawChart(results, name = '10000M Men') {
     }
 
     var options = {
-        chart: {
-            title: name,
-
+        title: name,
+        series: {
+            0: { targetAxisIndex: 1, color: "#FFD700" },
+            1: { targetAxisIndex: 2, color: "#B3B3B3" },
+            2: { targetAxisIndex: 3, color: "#CD7F32" },
         },
         hAxis: {
             format: "####"
         },
         vAxis: {
-            title: score_type
+            title: score_type,
+            scaleType: null
         },
-        width: 900,
-        height: 500
+        interpolateNulls: true,
+        width: 1000,
+        height: 800
     };
 
-    var chart = new google.charts.Line(document.getElementById('linechart_material'));
+    var chart = new google.visualization.LineChart(document.getElementById(element));
 
-    chart.draw(data, google.charts.Line.convertOptions(options));
+    chart.draw(data, options);
 }

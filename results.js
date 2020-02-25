@@ -11185,6 +11185,7 @@ original_results = [
         ], 
         "gender": "M", 
         "name": "Long Jump Men", 
+        "type": "time",
         "url": "https://www.olympic.org//athletics/long-jump-men"
     }, 
     {
@@ -14470,6 +14471,7 @@ original_results = [
         ], 
         "gender": "W", 
         "name": "1500M Women", 
+        "type": "time",
         "url": "https://www.olympic.org//athletics/1500m-women"
     }, 
     {
